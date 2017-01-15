@@ -28,4 +28,4 @@ END $$
 DELIMITER ;
 
 DROP PROCEDURE cancel_order
-CALL cancel_order('seat4','Coffee')
+CALL cancel_order('seat4','Idly')

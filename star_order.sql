@@ -61,4 +61,4 @@ DELIMITER ;
 
 DROP PROCEDURE to_insert
 
-CALL to_insert('seat4','Dosa,Idly','3','09:00')
+CALL to_insert('seat4','Chapatti','3',CURRENT_TIME)

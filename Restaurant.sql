@@ -51,7 +51,7 @@ END IF;
 	
 	
 	ELSE
-	SELECT 'Invalid Time' AS message;
+	SELECT 'Invalid Time.We dont serve those items now.' AS message;
 	END IF;
 	
 	
