@@ -1,12 +1,4 @@
-DELIMITER $$
-
-CREATE PROCEDURE stock_details()
-BEGIN
-SELECT menulist,quantity FROM menuorder;
-END $$
-DELIMITER ;
-
-CALL stock_details();
+/*Create a View to display the stock details*/
 
 CREATE VIEW view_stock AS
 SELECT foodList,TYPE,quantity FROM menu

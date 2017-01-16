@@ -1,6 +1,6 @@
-SET GLOBAL event_scheduler = 
-ON ;
+SET GLOBAL event_scheduler = ON ;
 
+/*Create an event to reset the stock every 24 hours*/
 DELIMITER $$
 CREATE EVENT stock_reset
  ON SCHEDULE  EVERY 1 DAY
@@ -22,4 +22,3 @@ DELIMITER ;
  DROP EVENT stock_reset
  SHOW EVENTS
  SHOW PROCESSLIST
- SELECT NOW()

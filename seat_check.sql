@@ -1,3 +1,4 @@
+/*Create a function to check the seat*/
 DELIMITER $$
 
 CREATE  FUNCTION check_seat(seat_no VARCHAR(20)) RETURNS INT(11)
@@ -13,9 +14,8 @@ END$$
 
 DELIMITER ;
 
-DROP FUNCTION check_seat
-SELECT  check_seat('seat11');
 
+/*Create a function to check the item*/
 
 DELIMITER $$
 
@@ -32,12 +32,8 @@ END$$
 
 DELIMITER ;
 
-SELECT check_item('Chapattis')
 
-
-
-
-
+/*Create a function to check the quantity*/
 
 DELIMITER $$
 
@@ -55,7 +51,6 @@ END $$
 
 DELIMITER ;
 
-DROP FUNCTION check_quantity
-SELECT check_quantity(1,1,500)
+
 
 

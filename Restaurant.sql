@@ -18,18 +18,21 @@ SET itemType =   (SELECT foodType FROM menuorder WHERE menuList=itemId AND foodt
 SET l_item=check_item(item);
 SET seat=check_seat(seatno);
 SET check_quant=check_quantity(itemId,itemType,quant);
+ /*Check whether the seat exists*/ 
 IF(seat=1)
 THEN
+/*Check whether the item exists*/ 
 IF(l_item=1)
 THEN
+/*Check whether the restaurant takes order in given time*/ 
 IF  EXISTS(SELECT id FROM foodtype WHERE orderedTime BETWEEN FromTime AND toTime)
 THEN
 
-
+/*Check whether the ordered item is served in respective session*/
 IF(itemType IN (SELECT id FROM FoodType WHERE foodtype.`FromTime` <=orderedTime  AND foodtype.`ToTime`>=orderedTime ))
 	THEN
 
-
+/*Check for the ordered quantity is available in stock*/
 
 IF(quant>0 AND quant<=(SELECT quantity FROM menuorder WHERE menuList=itemId AND foodType=itemtype))
 THEN
@@ -47,33 +50,22 @@ ELSE
 SELECT 'Invalid Quantity'AS message;
 END IF;	
 	
+ELSE
+SELECT 'Invalid Time.We dont serve those items now.' AS message;
+END IF;
 	
-	
-	
-	ELSE
-	SELECT 'Invalid Time.We dont serve those items now.' AS message;
-	END IF;
-	
-	
-	
-	
-
 ELSE
 SELECT 'We are not serving at a moment.Wait for next session' AS message;
-
 END IF;
 
 ELSE
 SELECT 'Invalid Item. We dont serve that item.' AS message;
-
 END IF;
-
-
 
 ELSE
 SELECT 'Invalid Seat no.Please choose the correct seat no(seat1-seat10)' AS message;
-
 END IF;
+
 END $$
 DELIMITER ;
 

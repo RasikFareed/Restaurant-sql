@@ -1,3 +1,4 @@
+/*Create a function to check the seat status*/
 DELIMITER $$
 CREATE FUNCTION seat_status(seatno VARCHAR(20)) RETURNS INT(11)
 BEGIN
@@ -14,5 +15,3 @@ RETURN flag;
 END $$
 DELIMITER ;
 
-DROP FUNCTION seat_status
-SELECT seat_status('seat4')

@@ -11,6 +11,7 @@ CREATE PROCEDURE to_insert(seatno VARCHAR(20),IN _list1 MEDIUMTEXT,IN _list2 MED
           DECLARE _value2 TEXT DEFAULT NULL;
           DECLARE counter INT;
           SET counter=0;
+/*Check for seat Availability*/
           IF(seat_status(seatno)=1)
           THEN
           
@@ -32,13 +33,14 @@ CREATE PROCEDURE to_insert(seatno VARCHAR(20),IN _list1 MEDIUMTEXT,IN _list2 MED
                  SET _next2 = SUBSTRING_INDEX(_list2,',',1);
                  SET _nextlen2 = LENGTH(_next2);
                  SET _value2 = TRIM(_next2);
- /*
- */              SET counter=counter+1;
-                IF(counter>5)
+  /*Check whether the ordered item is less than 5*/                 
+		SET counter=counter+1;
+                IF(counter>(SELECT order_limit FROM orderlimit))
                 THEN
                 SELECT 'You can choose only 5 items' AS message;
                 ELSE
-		CALL foodOrder(seatno,_next1,_next2,order_time);
+  /*Call the procedure foodOrder to order the items for requested seats*/ 
+		CALL foodOrder(seatno,_next1,_next2,CURRENT_TIME);
 		DO SLEEP(10);
 		SELECT * FROM food_transaction;
 		
@@ -61,4 +63,4 @@ DELIMITER ;
 
 DROP PROCEDURE to_insert
 
-CALL to_insert('seat4','Chapatti','3',CURRENT_TIME)
+CALL to_insert('seat4','Variety Rice,South Indian meals','3,4',CURRENT_TIME)
