@@ -1,18 +1,20 @@
 DELIMITER $$
 
-CREATE PROCEDURE foodOrder(seatno VARCHAR(20),item VARCHAR(20),quant SMALLINT,orderedTime TIME)
+CREATE PROCEDURE foodOrder(l_order_id INT,seatno VARCHAR(20),item VARCHAR(20),quant SMALLINT,orderedTime TIME)
 BEGIN
 DECLARE seat INT;
 DECLARE l_item VARCHAR(20);
 DECLARE itemId INT;
 DECLARE itemType INT;
 DECLARE check_quant INT;
+DECLARE l_seat_id INT;
 SET itemId =     (SELECT id FROM menu WHERE foodlist=item);
 SET itemType =   (SELECT foodType FROM menuorder WHERE menuList=itemId AND foodtype IN
 		(SELECT id FROM foodtype WHERE foodtype.`FromTime` <=orderedTime  AND foodtype.`ToTime`>=orderedTime ));
 SET l_item=check_item(item);
 SET seat=check_seat(seatno);
 SET check_quant=check_quantity(itemId,itemType,quant);
+SET l_seat_id=(SELECT id FROM seat WHERE Seats=seatno);
  /*Check whether the seat exists*/ 
 IF(seat=1)
 THEN
@@ -33,6 +35,7 @@ THEN
 	INSERT INTO food_transaction(seat_no,ordered_item,quantity,ordered_time,state)VALUES(seatno,item,quant,orderedTime,'Ordered');
 	UPDATE menuorder SET quantity=quantity-quant
 	WHERE menuList=itemId AND foodType=itemType;
+	insert into order_details(order_id,seat_id,order_item) values(l_order_id,l_seat_id,itemId);
 	COMMIT;
 ELSE
 SELECT 'Invalid Quantity'AS message;

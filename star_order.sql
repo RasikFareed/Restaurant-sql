@@ -10,7 +10,9 @@ CREATE PROCEDURE to_insert(seatno VARCHAR(20),IN _list1 MEDIUMTEXT,IN _list2 MED
           DECLARE _nextlen2 INT DEFAULT NULL;
           DECLARE _value2 TEXT DEFAULT NULL;
           DECLARE counter INT;
+          DECLARE order_id INT;
           SET counter=0;
+          SET order_id=(FLOOR(100+RAND()*(900)));
 /*Check for seat Availability*/
           IF(seat_status(seatno)=1)
           THEN
@@ -40,7 +42,7 @@ CREATE PROCEDURE to_insert(seatno VARCHAR(20),IN _list1 MEDIUMTEXT,IN _list2 MED
                 SELECT 'You can choose only 5 items' AS message;
                 ELSE
   /*Call the procedure foodOrder to order the items for requested seats*/ 
-		CALL foodOrder(seatno,_next1,_next2,CURRENT_TIME);
+		CALL foodOrder(order_id,seatno,_next1,_next2,CURRENT_TIME);
 		DO SLEEP(10);
 		SELECT * FROM food_transaction;
 		
@@ -63,4 +65,4 @@ DELIMITER ;
 
 DROP PROCEDURE to_insert
 
-CALL to_insert('seat4','Variety Rice,South Indian meals','3,4',CURRENT_TIME)
+CALL to_insert('seat4','Chapatti,Coffee','3,4',CURRENT_TIME)
