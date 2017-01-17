@@ -52,5 +52,42 @@ END $$
 DELIMITER ;
 
 
+/*Create a function to check whether Restaurant is serving*/
+DELIMITER $$
+CREATE  FUNCTION check_serving(orderedTime TIME) RETURNS INT(11)
+BEGIN
+DECLARE flag INT;
+
+IF  EXISTS(SELECT id FROM foodtype WHERE orderedTime BETWEEN FromTime AND ToTime)
+THEN
+SET flag=1;
+ELSE
+SET flag=0;
+END IF;
+RETURN flag;
+END $$
+DELIMITER ;
+
+SELECT check_serving('11:20:22')
+
+
+
+/*Create a function to check whether the ordered item is served in respective session*/
+DELIMITER $$
+CREATE  FUNCTION check_serving_time(itemType INT,orderedTime TIME) RETURNS INT(11)
+BEGIN
+DECLARE flag INT;
+IF(itemType IN (SELECT id FROM FoodType WHERE foodtype.`FromTime` <=orderedTime  AND foodtype.`ToTime`>=orderedTime ))
+THEN
+SET flag=1;
+ELSE
+SET flag=0;
+END IF;
+RETURN flag;
+END $$
+DELIMITER ;
+
+
+
 
 

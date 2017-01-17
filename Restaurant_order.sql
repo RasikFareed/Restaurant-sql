@@ -1,6 +1,6 @@
 DELIMITER $$
 
-CREATE PROCEDURE to_insert(seatno VARCHAR(20),IN _list1 MEDIUMTEXT,IN _list2 MEDIUMTEXT,order_time TIME)
+CREATE PROCEDURE place_order(seatno VARCHAR(20),IN _list1 MEDIUMTEXT,IN _list2 MEDIUMTEXT,order_time TIME)
     
     BEGIN
           DECLARE _next1 TEXT DEFAULT NULL ;
@@ -65,4 +65,4 @@ DELIMITER ;
 
 DROP PROCEDURE to_insert
 
-CALL to_insert('seat4','Variety Rice,South Indian Meals,Coffee','3,4,1',CURRENT_TIME)
+CALL place_order('seat4','Chapatti','',CURRENT_TIME)

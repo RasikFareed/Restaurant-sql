@@ -22,13 +22,13 @@ SET l_seat_id=(SELECT id FROM seat WHERE Seats=seatno);
 	IF(l_item=1)
 	THEN
 /*Check whether the restaurant takes order in given time*/ 
-	IF  EXISTS(SELECT id FROM foodtype WHERE orderedTime BETWEEN FromTime AND toTime)
+	IF(check_serving(orderedTime)=1)
 	THEN
 /*Check whether the ordered item is served in respective session*/
-	IF(itemType IN (SELECT id FROM FoodType WHERE foodtype.`FromTime` <=orderedTime  AND foodtype.`ToTime`>=orderedTime ))
+	IF(check_serving_time(itemType,orderedTime)=1)
 	THEN
 /*Check for the ordered quantity is available in stock*/
-	IF(quant>0 AND quant<=(SELECT quantity FROM menuorder WHERE menuList=itemId AND foodType=itemtype))
+	IF(check_quant=1)
 	THEN
 		START TRANSACTION;
 		SET Autocommit=0;
@@ -38,7 +38,7 @@ SET l_seat_id=(SELECT id FROM seat WHERE Seats=seatno);
 		INSERT INTO order_details(order_id,seat_id,order_item) VALUES(l_order_id,l_seat_id,itemId);
 		COMMIT;
 	ELSE
-	SELECT 'Invalid Quantity'AS message;
+	SELECT 'Invalid Quantity.Please choose a valid quantity'AS message;
 	END IF;	
 	ELSE
 	SELECT 'Invalid Time.We dont serve those items now.' AS message;
@@ -57,6 +57,6 @@ DELIMITER ;
 
 DROP PROCEDURE foodOrder;
 
-CALL foodOrder('seat1','Chapatti',5,'20:00');
+CALL foodOrder('seat1','Chapatti',5,'11:00');
 
 TRUNCATE food_transaction
