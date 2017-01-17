@@ -1,3 +1,4 @@
+DROP PROCEDURE view_order_details
 DELIMITER $$
 CREATE PROCEDURE view_order_details (l_order_id INT)
 BEGIN
@@ -8,5 +9,6 @@ ORDER BY order_id;
 END $$
 DELIMITER ;
 
-DROP PROCEDURE view_order_details
-CALL view_order_details(491)
+
+SELECT*FROM order_details
+CALL view_order_details(691)

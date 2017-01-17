@@ -65,4 +65,4 @@ DELIMITER ;
 
 DROP PROCEDURE to_insert
 
-CALL to_insert('seat4','Chapatti,Coffee','3,4',CURRENT_TIME)
+CALL to_insert('seat4','Variety Rice,South Indian Meals,Coffee','3,4,1',CURRENT_TIME)

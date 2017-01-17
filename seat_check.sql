@@ -32,7 +32,7 @@ END$$
 
 DELIMITER ;
 
-
+SELECT check_item('Fried Rice')
 /*Create a function to check the quantity*/
 
 DELIMITER $$
