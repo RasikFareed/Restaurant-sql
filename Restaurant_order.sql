@@ -1,3 +1,5 @@
+DROP PROCEDURE place_order; 
+
 DELIMITER $$
 
 CREATE PROCEDURE place_order(seatno VARCHAR(20),IN _list1 MEDIUMTEXT,IN _list2 MEDIUMTEXT,order_time TIME)
@@ -10,6 +12,7 @@ CREATE PROCEDURE place_order(seatno VARCHAR(20),IN _list1 MEDIUMTEXT,IN _list2 M
           DECLARE _nextlen2 INT DEFAULT NULL;
           DECLARE _value2 TEXT DEFAULT NULL;
           DECLARE counter INT;
+          
           DECLARE order_id INT;
           SET counter=0;
           SET order_id=(FLOOR(100+RAND()*(900)));
@@ -69,4 +72,4 @@ CREATE PROCEDURE place_order(seatno VARCHAR(20),IN _list1 MEDIUMTEXT,IN _list2 M
 DELIMITER ;
 
 
-CALL place_order('seat4','Chapatti,Poori','2,5',CURRENT_TIME)
+CALL place_order('seat1','Chapatti,Chat','50,5',CURRENT_TIME)

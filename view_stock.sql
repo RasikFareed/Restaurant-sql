@@ -2,10 +2,10 @@
 DROP VIEW view_stock
 
 CREATE VIEW view_stock AS
-SELECT foodList,TYPE,quantity FROM menu
+SELECT food_list,TYPE,menuorder.`quantity` FROM menu
 JOIN menuorder,foodtype
-WHERE menu.`id`=menuorder.`menuList` AND foodtype.`id`=menuorder.`foodType`
-ORDER BY foodlist;
+WHERE menu.`id`=menuorder.`menu_list` AND foodtype.`id`=menuorder.`food_type`
+ORDER BY food_list;
 
 
 

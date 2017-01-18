@@ -21,11 +21,11 @@ EVENT:
 To reset the stock-------->stock_reset event is used
 */
 
-CALL place_order('seat4','Chapatti','',CURRENT_TIME)
+CALL place_order('seat4','Chapatti,Chat items','2,3','20:00:00')
 
-CALL cancel_order('seat4','Coffee')
+CALL cancel_order('seat4','Chapatti')
 
-CALL add_food(15,'Porattas','Dinner')
+CALL add_food(20,'Porattas','Dinner')
 
 SELECT * FROM view_order_details
 
