@@ -36,8 +36,7 @@ SET l_qty=(SELECT quantity FROM menuorder WHERE menuList=itemId AND foodType=ite
 END $$
 DELIMITER ;
 
-DROP PROCEDURE cancel_order
-CALL cancel_order('seat4','Coffee')
+
 
 
 

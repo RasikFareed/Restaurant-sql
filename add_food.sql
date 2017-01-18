@@ -18,4 +18,3 @@ COMMIT;
 END$$
 DELIMITER ;
 
-CALL add_food(15,'Porattas','Dinner')

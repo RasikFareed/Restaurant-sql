@@ -32,7 +32,7 @@ END$$
 
 DELIMITER ;
 
-SELECT check_item('Fried Rice')
+
 /*Create a function to check the quantity*/
 
 DELIMITER $$
@@ -68,7 +68,7 @@ RETURN flag;
 END $$
 DELIMITER ;
 
-SELECT check_serving('11:20:22')
+
 
 
 

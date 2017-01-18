@@ -19,6 +19,6 @@ WHERE menuorder.`foodType`IN(1,2,3,4);
 DELIMITER ;
  
 
- DROP EVENT stock_reset
+
  SHOW EVENTS
  SHOW PROCESSLIST

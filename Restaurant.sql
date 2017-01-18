@@ -55,7 +55,6 @@ SET l_seat_id=(SELECT id FROM seat WHERE Seats=seatno);
 END $$
 DELIMITER ;
 
-DROP PROCEDURE foodOrder;
 
 
-TRUNCATE food_transaction
+
