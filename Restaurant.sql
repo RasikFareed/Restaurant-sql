@@ -57,6 +57,5 @@ DELIMITER ;
 
 DROP PROCEDURE foodOrder;
 
-CALL foodOrder('seat1','Chapatti',5,'11:00');
 
 TRUNCATE food_transaction

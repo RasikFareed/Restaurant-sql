@@ -13,6 +13,7 @@ SET new_menulist=(SELECT id FROM menu WHERE foodList=item);
 SET new_foodtype=(SELECT foodtype.`id` FROM foodtype WHERE foodtype.`Type`=food_type);
 
 INSERT INTO menuorder(menuList,foodType,quantity)VALUES(new_menulist,new_foodtype,(SELECT quantity FROM foodtype WHERE foodtype.`id`=new_foodtype));
+INSERT INTO foodstock(menu_list,food_type,quantity)VALUES(new_menulist,new_foodtype,(SELECT quantity FROM foodtype WHERE foodtype.`id`=new_foodtype));
 COMMIT;
 END$$
 DELIMITER ;

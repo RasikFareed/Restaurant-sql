@@ -13,6 +13,10 @@ CREATE PROCEDURE place_order(seatno VARCHAR(20),IN _list1 MEDIUMTEXT,IN _list2 M
           DECLARE order_id INT;
           SET counter=0;
           SET order_id=(FLOOR(100+RAND()*(900)));
+          IF LENGTH(TRIM(_list1)) = 0 OR _list1 IS NULL OR LENGTH(TRIM(_list2)) = 0 OR _list2 IS NULL
+          THEN
+             SELECT 'Invalid Order' AS message;
+          ELSE
 /*Check for seat Availability*/
           IF(seat_status(seatno)=1)
           THEN
@@ -25,8 +29,8 @@ CREATE PROCEDURE place_order(seatno VARCHAR(20),IN _list1 MEDIUMTEXT,IN _list2 M
          LOOP    
             IF LENGTH(TRIM(_list1)) = 0 OR _list1 IS NULL OR LENGTH(TRIM(_list2)) = 0 OR _list2 IS NULL THEN
               LEAVE iterator;
-              END IF;
-  
+           
+		   END IF;
    
                  SET _next1 = SUBSTRING_INDEX(_list1,',',1);
                  SET _nextlen1 = LENGTH(_next1);
@@ -49,6 +53,7 @@ CREATE PROCEDURE place_order(seatno VARCHAR(20),IN _list1 MEDIUMTEXT,IN _list2 M
                 END IF;           
                    SET _list1 = INSERT(_list1,1,_nextlen1 + 1,'');
                    SET _list2 = INSERT(_list2,1,_nextlen2 + 1,'');
+                  
 
          END LOOP; 
        ELSE
@@ -59,10 +64,10 @@ CREATE PROCEDURE place_order(seatno VARCHAR(20),IN _list1 MEDIUMTEXT,IN _list2 M
          UPDATE seat_status
          SET state='Available'
          WHERE seat_id=(SELECT id FROM seat WHERE Seats=seatno);
-              
+       END IF;       
     END$$
 DELIMITER ;
 
-DROP PROCEDURE to_insert
+DROP PROCEDURE place_order
 
-CALL place_order('seat4','Chapatti','',CURRENT_TIME)
+CALL place_order('seat4','Chapatti','2',CURRENT_TIME)
