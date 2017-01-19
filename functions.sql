@@ -1,5 +1,6 @@
 /*Create a function to check the seat*/
 DROP FUNCTION check_seat;
+
 DELIMITER $$
 
 CREATE  FUNCTION check_seat(seat_no VARCHAR(20)) RETURNS INT(11)
@@ -15,7 +16,7 @@ END$$
 
 DELIMITER ;
 
-
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*Create a function to check the item*/
 DROP FUNCTION check_item;
 DELIMITER $$
@@ -34,6 +35,7 @@ END$$
 DELIMITER ;
 
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*Create a function to check the quantity*/
 DROP FUNCTION check_quantity;
 
@@ -54,6 +56,7 @@ END $$
 DELIMITER ;
 
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*Create a function to check whether Restaurant is serving*/
 DROP FUNCTION check_serving;
 
@@ -73,8 +76,7 @@ END $$
 DELIMITER ;
 
 
-
-
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 /*Create a function to check whether the ordered item is served in respective session*/
 DROP FUNCTION check_serving_time;
@@ -93,6 +95,7 @@ END $$
 DELIMITER ;
 
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*Create a function to check the seat status*/
 DROP FUNCTION seat_status;
 

@@ -72,4 +72,4 @@ CREATE PROCEDURE place_order(seatno VARCHAR(20),IN _list1 MEDIUMTEXT,IN _list2 M
 DELIMITER ;
 
 
-CALL place_order('seat1','Chapatti,Chat','50,5',CURRENT_TIME)
+

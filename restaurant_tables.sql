@@ -1,109 +1,129 @@
 CREATE TABLE menu (
-  id SMALLINT(6) NOT NULL,
-  foodList VARCHAR(20) UNIQUE NOT NULL ,
-  PRIMARY KEY (id)
+  id SMALLINT() NOT NULL,
+  food_list VARCHAR() UNIQUE NOT NULL ,
+  PRIMARY KEY ()
 )
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE menuorder (
-  id SMALLINT(6) NOT NULL AUTO_INCREMENT,
-  menuList SMALLINT(11) NOT NULL,
-  foodType SMALLINT(11) NOT NULL,
-  quantity INT(11) NOT NULL,
+  id SMALLINT() NOT NULL AUTO_INCREMENT,
+  menu_list SMALLINT() NOT NULL,
+  food_type SMALLINT() NOT NULL,
+  quantity INT() NOT NULL,
   PRIMARY KEY (id),
-  CONSTRAINT fk_foodtype FOREIGN KEY (foodType) REFERENCES foodtype (id),
-  CONSTRAINT fk_menulist FOREIGN KEY (menuList) REFERENCES menu (id)
+  CONSTRAINT fk_foodtype FOREIGN KEY (food_type) REFERENCES foodtype (id),
+  CONSTRAINT fk_menulist FOREIGN KEY (menu_list) REFERENCES menu (id)
 )
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE seat (
-  id SMALLINT(6) NOT NULL,
-  Seats VARCHAR(20) UNIQUE NOT NULL,
+  id SMALLINT() NOT NULL,
+  Seats VARCHAR() UNIQUE NOT NULL,
   PRIMARY KEY (id)
 )
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE seat_status (
-  id SMALLINT(6) NOT NULL,
-  seat_id SMALLINT(6) NOT NULL,
-  state VARCHAR(20) NOT NULL DEFAULT 'Available',
-  PRIMARY KEY (`id`),
+  id SMALLINT() NOT NULL,
+  seat_id SMALLINT() NOT NULL,
+  state VARCHAR() NOT NULL DEFAULT 'Available',
+  PRIMARY KEY (id),
   CONSTRAINT fk_seatstatus FOREIGN KEY (seat_id) REFERENCES seat (id)
 )
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE foodtype (
-  id SMALLINT(6) NOT NULL,
-  TYPE VARCHAR(200) UNIQUE NOT NULL,
-  FromTime TIME NOT NULL,
-  ToTime TIME NOT NULL,
-  quantity INT(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  id SMALLINT() NOT NULL,
+  TYPE VARCHAR() UNIQUE NOT NULL,
+  From_time TIME NOT NULL,
+  To_time TIME NOT NULL,
+  quantity INT() NOT NULL,
+  PRIMARY KEY (id)
 )
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE food_stock (
-  id SMALLINT(6) NOT NULL,
-  menu_list SMALLINT(6) NOT NULL,
-  food_type SMALLINT(6) NOT NULL,
-  quantity INT(11) NOT NULL,
+  id SMALLINT() NOT NULL,
+  menu_list SMALLINT() NOT NULL,
+  food_type SMALLINT() NOT NULL,
+  quantity INT() NOT NULL,
   PRIMARY KEY (id)
 )
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE food_transaction (
-  id SMALLINT(6) NOT NULL AUTO_INCREMENT,
-  seat_no VARCHAR(20) NOT NULL,
-  ordered_item VARCHAR(20) NOT NULL,
-  quantity INT(11) NOT NULL,
-  ordered_time VARCHAR(20) NOT NULL,
-  state VARCHAR(20) NOT NULL
+  id SMALLINT() NOT NULL AUTO_INCREMENT,
+  seat_no VARCHAR() NOT NULL,
+  ordered_item VARCHAR() NOT NULL,
+  quantity INT() NOT NULL,
+  ordered_time VARCHAR() NOT NULL,
+  state VARCHAR() NOT NULL
 )
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE orderlimit (
-  id SMALLINT(6) NOT NULL,
-  order_limit SMALLINT(6) NOT NULL,
+  id SMALLINT() NOT NULL,
+  order_limit SMALLINT() NOT NULL,
   PRIMARY KEY (id)
 )
 
-
-INSERT INTO foodtype(id,TYPE,FromTime,ToTime,quantity) VALUES(1,'Breakfast','08:00:00','11:00:00',100);
-INSERT INTO foodtype(id,TYPE,FromTime,ToTime,quantity) VALUES(1,'Lunch','11:15:00','15:00:00',100);
-INSERT INTO foodtype(id,TYPE,FromTime,ToTime,quantity) VALUES(1,'Refreshment','15:15:00','23:00:00',100);
-INSERT INTO foodtype(id,TYPE,FromTime,ToTime,quantity) VALUES(1,'Dinner','19:00:00','23:00:00',100);
-
-
-
-
-INSERT INTO menu(id,foodList)VALUES(1,'Idly');
-INSERT INTO menu(id,foodList)VALUES(2,'Vada');
-INSERT INTO menu(id,foodList)VALUES(3,'Dosa');
-INSERT INTO menu(id,foodList)VALUES(4,'Poori');
-INSERT INTO menu(id,foodList)VALUES(5,'Pongal');
-INSERT INTO menu(id,foodList)VALUES(6,'Coffee');
-INSERT INTO menu(id,foodList)VALUES(7,'Tea');
-INSERT INTO menu(id,foodList)VALUES(8,'South Indian Meals');
-INSERT INTO menu(id,foodList)VALUES(9,'North Indian Thali');
-INSERT INTO menu(id,foodList)VALUES(10,'Variety Rice');
-INSERT INTO menu(id,foodList)VALUES(11,'Snacks');
-INSERT INTO menu(id,foodList)VALUES(12,'Fried Rice');
-INSERT INTO menu(id,foodList)VALUES(13,'Chapatti');
-INSERT INTO menu(id,foodList)VALUES(14,'Chat Items');
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CREATE TABLE order_details (
+  id SMALLINT() NOT NULL AUTO_INCREMENT,
+  order_id INT() NOT NULL,
+  seat_id SMALLINT() NOT NULL,
+  order_item SMALLINT() NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_orderid FOREIGN KEY (order_item) REFERENCES menu (id),
+  CONSTRAINT fk_seatid FOREIGN KEY (seat_id) REFERENCES seat (id)
+)
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+INSERT INTO foodtype(id,TYPE,From_time,To_time,quantity) VALUES(1,'Breakfast','08:00:00','11:00:00',100);
+INSERT INTO foodtype(id,TYPE,From_time,To_time,quantity) VALUES(1,'Lunch','11:15:00','15:00:00',100);
+INSERT INTO foodtype(id,TYPE,From_time,To_time,quantity) VALUES(1,'Refreshment','15:15:00','23:00:00',100);
+INSERT INTO foodtype(id,TYPE,From_time,To_time,quantity)VALUES(1,'Dinner','19:00:00','23:00:00',100);
 
 
-INSERT INTO menuorder(menuList,foodType,quantity)VALUES(1,1,100);
-INSERT INTO menuorder(menuList,foodType,quantity)VALUES(2,1,100);
-INSERT INTO menuorder(menuList,foodType,quantity)VALUES(3,1,100);
-INSERT INTO menuorder(menuList,foodType,quantity)VALUES(4,1,100);
-INSERT INTO menuorder(menuList,foodType,quantity)VALUES(5,1,100);
-INSERT INTO menuorder(menuList,foodType,quantity)VALUES(6,1,100);
-INSERT INTO menuorder(menuList,foodType,quantity)VALUES(7,1,100);
-INSERT INTO menuorder(menuList,foodType,quantity)VALUES(8,2,100);
-INSERT INTO menuorder(menuList,foodType,quantity)VALUES(9,2,100);
-INSERT INTO menuorder(menuList,foodType,quantity)VALUES(10,2,100);
-INSERT INTO menuorder(menuList,foodType,quantity)VALUES(11,3,100);
-INSERT INTO menuorder(menuList,foodType,quantity)VALUES(12,3,100);
-INSERT INTO menuorder(menuList,foodType,quantity)VALUES(13,3,100);
-INSERT INTO menuorder(menuList,foodType,quantity)VALUES(14,4,100);
-INSERT INTO menuorder(menuList,foodType,quantity)VALUES(15,4,100);
-INSERT INTO menuorder(menuList,foodType,quantity)VALUES(16,4,100);
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+INSERT INTO menu(id,food_list)VALUES(1,'Idly');
+INSERT INTO menu(id,food_list)VALUES(2,'Vada');
+INSERT INTO menu(id,food_list)VALUES(3,'Dosa');
+INSERT INTO menu(id,food_list)VALUES(4,'Poori');
+INSERT INTO menu(id,food_list)VALUES(5,'Pongal');
+INSERT INTO menu(id,food_list)VALUES(6,'Coffee');
+INSERT INTO menu(id,food_list)VALUES(7,'Tea');
+INSERT INTO menu(id,food_list)VALUES(8,'South Indian Meals');
+INSERT INTO menu(id,food_list)VALUES(9,'North Indian Thali');
+INSERT INTO menu(id,food_list)VALUES(10,'Variety Rice');
+INSERT INTO menu(id,food_list)VALUES(11,'Snacks');
+INSERT INTO menu(id,food_list)VALUES(12,'Fried Rice');
+INSERT INTO menu(id,food_list)VALUES(13,'Chapatti');
+INSERT INTO menu(id,food_list)VALUES(14,'Chat Items');
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(1,1,100);
+INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(2,1,100);
+INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(3,1,100);
+INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(4,1,100);
+INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(5,1,100);
+INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(6,1,100);
+INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(7,1,100);
+INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(8,2,100);
+INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(9,2,100);
+INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(10,2,100);
+INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(11,3,100);
+INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(12,3,100);
+INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(13,3,100);
+INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(14,4,100);
+INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(15,4,100);
+INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(16,4,100);
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 INSERT INTO seat(id,Seats)VALUES(1,'seat1');
 INSERT INTO seat(id,Seats)VALUES(2,'seat1');
 INSERT INTO seat(id,Seats)VALUES(3,'seat1');
@@ -116,6 +136,7 @@ INSERT INTO seat(id,Seats)VALUES(9,'seat1');
 INSERT INTO seat(id,Seats)VALUES(10,'seat1');
 
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 INSERT INTO seat_status(id,seat_id,state)VALUES(1,1,'Available');
 INSERT INTO seat_status(id,seat_id,state)VALUES(2,2,'Available');
 INSERT INTO seat_status(id,seat_id,state)VALUES(3,3,'Available');
@@ -128,4 +149,5 @@ INSERT INTO seat_status(id,seat_id,state)VALUES(9,9,'Available');
 INSERT INTO seat_status(id,seat_id,state)VALUES(10,10,'Available');
 
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 INSERT INTO orderlimit(id,order_limit)VALUES(1,5);
