@@ -112,12 +112,12 @@ INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(4,1,100);
 INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(5,1,100);
 INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(6,1,100);
 INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(7,1,100);
-INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(8,2,100);
-INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(9,2,100);
-INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(10,2,100);
-INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(11,3,100);
-INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(12,3,100);
-INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(13,3,100);
+INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(8,2,75);
+INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(9,2,75);
+INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(10,2,75);
+INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(11,3,200);
+INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(12,3,200);
+INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(13,3,200);
 INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(14,4,100);
 INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(15,4,100);
 INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(16,4,100);
@@ -125,15 +125,15 @@ INSERT INTO menuorder(menu_list,food_type,quantity)VALUES(16,4,100);
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 INSERT INTO seat(id,Seats)VALUES(1,'seat1');
-INSERT INTO seat(id,Seats)VALUES(2,'seat1');
-INSERT INTO seat(id,Seats)VALUES(3,'seat1');
-INSERT INTO seat(id,Seats)VALUES(4,'seat1');
-INSERT INTO seat(id,Seats)VALUES(5,'seat1');
-INSERT INTO seat(id,Seats)VALUES(6,'seat1');
-INSERT INTO seat(id,Seats)VALUES(7,'seat1');
-INSERT INTO seat(id,Seats)VALUES(8,'seat1');
-INSERT INTO seat(id,Seats)VALUES(9,'seat1');
-INSERT INTO seat(id,Seats)VALUES(10,'seat1');
+INSERT INTO seat(id,Seats)VALUES(2,'seat2');
+INSERT INTO seat(id,Seats)VALUES(3,'seat3');
+INSERT INTO seat(id,Seats)VALUES(4,'seat4');
+INSERT INTO seat(id,Seats)VALUES(5,'seat5');
+INSERT INTO seat(id,Seats)VALUES(6,'seat6');
+INSERT INTO seat(id,Seats)VALUES(7,'seat7');
+INSERT INTO seat(id,Seats)VALUES(8,'seat8');
+INSERT INTO seat(id,Seats)VALUES(9,'seat9');
+INSERT INTO seat(id,Seats)VALUES(10,'seat10');
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
