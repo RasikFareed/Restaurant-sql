@@ -15,7 +15,10 @@ CREATE PROCEDURE place_order(seatno VARCHAR(20),IN _list1 MEDIUMTEXT,IN _list2 M
           
           DECLARE order_id INT;
           SET counter=0;
-          SET order_id=(FLOOR(100+RAND()*(900)));
+          SELECT rand_no() INTO order_id; 
+					
+SET autocommit=0;
+START TRANSACTION;
           IF LENGTH(TRIM(_list1)) = 0 OR _list1 IS NULL OR LENGTH(TRIM(_list2)) = 0 OR _list2 IS NULL
           THEN
              SELECT 'Invalid Order' AS message;
@@ -50,7 +53,8 @@ CREATE PROCEDURE place_order(seatno VARCHAR(20),IN _list1 MEDIUMTEXT,IN _list2 M
                 ELSE
   /*Call the procedure foodOrder to order the items for requested seats*/ 
 		CALL foodOrder(order_id,seatno,_next1,_next2,CURRENT_TIME);
-		DO SLEEP(10);
+		DO SLEEP(5);
+		
 		SELECT * FROM food_transaction;
 		
                 END IF;           
@@ -67,7 +71,8 @@ CREATE PROCEDURE place_order(seatno VARCHAR(20),IN _list1 MEDIUMTEXT,IN _list2 M
          UPDATE seat_status
          SET state='Available'
          WHERE seat_id=(SELECT id FROM seat WHERE Seats=seatno);
-       END IF;       
+       END IF;    
+  COMMIT;   
     END$$
 DELIMITER ;
 

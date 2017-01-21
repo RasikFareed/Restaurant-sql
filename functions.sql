@@ -116,5 +116,21 @@ END $$
 DELIMITER ;
 
 CALL seat_status('seat1')
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*Create a function to generate unique order_id*/
+DROP FUNCTION rand_no;
+
+DELIMITER $$
+CREATE FUNCTION rand_no() RETURNS INT(11)
+BEGIN
+DECLARE order_id INT;
+SET order_id=(FLOOR(100+RAND()*(900)));
+IF order_id IN(SELECT ordered_id AS ordere_id FROM food_transaction)
+THEN
+CALL rand_no();
+END IF;
+RETURN order_id;
+END $$
+DELIMITER ;
 
 

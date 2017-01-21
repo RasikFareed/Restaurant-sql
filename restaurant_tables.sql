@@ -54,12 +54,14 @@ CREATE TABLE food_stock (
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE food_transaction (
   id SMALLINT() NOT NULL AUTO_INCREMENT,
+  ordered_id INT() NOT NULL,
   seat_no VARCHAR() NOT NULL,
   ordered_item VARCHAR() NOT NULL,
   quantity INT() NOT NULL,
   ordered_time VARCHAR() NOT NULL,
-  state VARCHAR() NOT NULL
-)
+  ordered_date DATE NOT NULL,
+  state VARCHAR() NOT NULL,
+) 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE orderlimit (

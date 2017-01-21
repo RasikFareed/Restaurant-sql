@@ -34,10 +34,11 @@ SET l_seat_id=(SELECT id FROM seat WHERE Seats=seatno);
 	THEN
 		START TRANSACTION;
 		SET Autocommit=0;
-		INSERT INTO food_transaction(seat_no,ordered_item,quantity,ordered_time,state)VALUES(seatno,item,quant,orderedTime,'Ordered');
+		INSERT INTO food_transaction(ordered_id,seat_no,ordered_item,quantity,ordered_time,ordered_date,state)VALUES(l_order_id,seatno,item,quant,orderedTime,CURRENT_DATE,'Ordered');
 		UPDATE menuorder SET quantity=quantity-quant
 		WHERE menu_list=itemId AND food_type=itemType;
 		INSERT INTO order_details(order_id,seat_id,order_item) VALUES(l_order_id,l_seat_id,itemId);
+		SELECT 'Order Placed. Your order id is',l_order_id AS order_id;
 		COMMIT;
 	ELSE
 	SELECT 'Invalid Quantity.Please choose a valid quantity'AS message;
