@@ -2,7 +2,7 @@ DROP PROCEDURE foodOrder;
 
 DELIMITER $$
 
-CREATE PROCEDURE foodOrder(l_order_id INT,seatno VARCHAR(20),item VARCHAR(20),quant SMALLINT,orderedTime TIME)
+CREATE PROCEDURE foodOrder(l_order_id INT,seatno VARCHAR(20),item VARCHAR(20),quant SMALLINT,orderedTime TIME,OUT out_message VARCHAR(200))
 BEGIN
 DECLARE seat INT;
 DECLARE l_item VARCHAR(20);
@@ -38,22 +38,22 @@ SET l_seat_id=(SELECT id FROM seat WHERE Seats=seatno);
 		UPDATE menuorder SET quantity=quantity-quant
 		WHERE menu_list=itemId AND food_type=itemType;
 		INSERT INTO order_details(order_id,seat_id,order_item) VALUES(l_order_id,l_seat_id,itemId);
-		SELECT 'Order Placed. Your order id is',l_order_id AS order_id;
+		SELECT CONCAT('Order Placed. Your order id is ',l_order_id)INTO out_message;
 		COMMIT;
 	ELSE
-	SELECT 'Invalid Quantity.Please choose a valid quantity'AS message;
+	SELECT 'Invalid Quantity.Please choose a valid quantity'INTO out_message;
 	END IF;	
 	ELSE
-	SELECT 'Invalid Time.We dont serve those items now.' AS message;
+	SELECT 'Invalid Time.We dont serve those items now.' INTO out_message;
 	END IF;
 	ELSE
-	SELECT 'We are not serving at a moment.Wait for next session' AS message;
+	SELECT 'We are not serving at a moment.Wait for next session' INTO out_message;
 	END IF;
 	ELSE
-	SELECT 'Invalid Item. We dont serve that item.' AS message;
+	SELECT 'Invalid Item. We dont serve that item.' INTO out_message;
 	END IF;
 	ELSE
-	SELECT 'Invalid Seat no.Please choose the correct seat no(seat1-seat10)' AS message;
+	SELECT 'Invalid Seat no.Please choose the correct seat no(seat1-seat10)' INTO out_message;
 	END IF;
 END $$
 DELIMITER ;

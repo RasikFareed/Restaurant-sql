@@ -1,15 +1,15 @@
 CREATE TABLE menu (
-  id SMALLINT() NOT NULL,
-  food_list VARCHAR() UNIQUE NOT NULL ,
-  PRIMARY KEY ()
+  id SMALLINT NOT NULL,
+  food_list VARCHAR(20) UNIQUE NOT NULL ,
+  PRIMARY KEY (id)
 )
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE menuorder (
-  id SMALLINT() NOT NULL AUTO_INCREMENT,
-  menu_list SMALLINT() NOT NULL,
-  food_type SMALLINT() NOT NULL,
-  quantity INT() NOT NULL,
+  id SMALLINT NOT NULL AUTO_INCREMENT,
+  menu_list SMALLINT NOT NULL,
+  food_type SMALLINT NOT NULL,
+  quantity INT NOT NULL,
   PRIMARY KEY (id),
   CONSTRAINT fk_foodtype FOREIGN KEY (food_type) REFERENCES foodtype (id),
   CONSTRAINT fk_menulist FOREIGN KEY (menu_list) REFERENCES menu (id)
@@ -18,55 +18,56 @@ CREATE TABLE menuorder (
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE seat (
-  id SMALLINT() NOT NULL,
-  Seats VARCHAR() UNIQUE NOT NULL,
+  id SMALLINT NOT NULL,
+  Seats VARCHAR(20) UNIQUE NOT NULL,
   PRIMARY KEY (id)
 )
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE seat_status (
-  id SMALLINT() NOT NULL,
-  seat_id SMALLINT() NOT NULL,
-  state VARCHAR() NOT NULL DEFAULT 'Available',
+  id SMALLINT NOT NULL,
+  seat_id SMALLINT NOT NULL,
+  state VARCHAR(20) NOT NULL DEFAULT 'Available',
+  concurrent_user_state TINYINT NOT NULL DEFAULT '0',
   PRIMARY KEY (id),
   CONSTRAINT fk_seatstatus FOREIGN KEY (seat_id) REFERENCES seat (id)
 )
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE foodtype (
-  id SMALLINT() NOT NULL,
-  TYPE VARCHAR() UNIQUE NOT NULL,
+  id SMALLINT NOT NULL,
+  TYPE VARCHAR(20) UNIQUE NOT NULL,
   From_time TIME NOT NULL,
   To_time TIME NOT NULL,
-  quantity INT() NOT NULL,
+  quantity INT NOT NULL,
   PRIMARY KEY (id)
 )
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE food_stock (
-  id SMALLINT() NOT NULL,
-  menu_list SMALLINT() NOT NULL,
-  food_type SMALLINT() NOT NULL,
-  quantity INT() NOT NULL,
+  id SMALLINT NOT NULL,
+  menu_list SMALLINT NOT NULL,
+  food_type SMALLINT NOT NULL,
+  quantity INT NOT NULL,
   PRIMARY KEY (id)
 )
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE food_transaction (
-  id SMALLINT() NOT NULL AUTO_INCREMENT,
-  ordered_id INT() NOT NULL,
-  seat_no VARCHAR() NOT NULL,
-  ordered_item VARCHAR() NOT NULL,
-  quantity INT() NOT NULL,
-  ordered_time VARCHAR() NOT NULL,
+  id SMALLINT NOT NULL AUTO_INCREMENT,
+  ordered_id INT NOT NULL,
+  seat_no VARCHAR(20) NOT NULL,
+  ordered_item VARCHAR(20) NOT NULL,
+  quantity INT NOT NULL,
+  ordered_time VARCHAR(20) NOT NULL,
   ordered_date DATE NOT NULL,
-  state VARCHAR() NOT NULL,
+  state VARCHAR(20) NOT NULL,
 ) 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE orderlimit (
-  id SMALLINT() NOT NULL,
-  order_limit SMALLINT() NOT NULL,
+  id SMALLINT NOT NULL,
+  order_limit SMALLINT NOT NULL,
   PRIMARY KEY (id)
 )
 

@@ -1,7 +1,8 @@
 DROP PROCEDURE cancel_order;
+
 DELIMITER $$
 
-CREATE PROCEDURE cancel_order(order_id INT,seatno VARCHAR(20),item VARCHAR(20))
+CREATE PROCEDURE cancel_order(order_id INT,seatno VARCHAR(20),item VARCHAR(20),OUT cancel_message VARCHAR(50))
 BEGIN
 DECLARE itemId INT;
 DECLARE itemType INT;
@@ -33,14 +34,17 @@ THEN
 		UPDATE menuorder
 		SET quantity=quantity+qty
 		WHERE menu_list=itemId AND food_type=itemType ;
-		SELECT 'Order cancelled sucessfully' AS message;
+		SELECT 'Order cancelled sucessfully' INTO cancel_message;
+		SELECT cancel_message;
 		COMMIT;
 	ELSE
-		SELECT 'You cant cancel'AS message;
+		SELECT 'You cant cancel'INTO cancel_message;
+		SELECT cancel_message;
 		
 	END IF;
 ELSE
-	SELECT 'There is no such order id.' AS message;
+	SELECT 'There is no such order id.' INTO cancel_message;
+	SELECT cancel_message;
 END IF;
 	
 END $$

@@ -16,6 +16,7 @@ END$$
 
 DELIMITER ;
 
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*Create a function to check the item*/
 DROP FUNCTION check_item;
@@ -84,7 +85,7 @@ DELIMITER $$
 CREATE  FUNCTION check_serving_time(itemType INT,orderedTime TIME) RETURNS INT(11)
 BEGIN
 DECLARE flag INT;
-IF(itemType IN (SELECT id FROM FoodType WHERE foodtype.`From_time` <=orderedTime  AND foodtype.`To_time`>=orderedTime ))
+IF(itemType IN (SELECT id FROM foodtype WHERE foodtype.`From_time` <=orderedTime  AND foodtype.`To_time`>=orderedTime ))
 THEN
 SET flag=1;
 ELSE
@@ -104,18 +105,24 @@ CREATE FUNCTION seat_status(seatno VARCHAR(20)) RETURNS INT(11)
 BEGIN
 DECLARE states VARCHAR(20);
 DECLARE flag INT;
+DECLARE toggle_seats BOOLEAN;
+SELECT concurrent_user_state INTO toggle_seats FROM seat_status WHERE seat_id=(SELECT id FROM seat WHERE Seats=seatno);
 SET states=(SELECT state FROM seat_status WHERE seat_id=(SELECT id FROM seat WHERE Seats=seatno));
 IF(states='Available')
 THEN
-SET flag=1;
-ELSE
-SET flag=0;
+IF toggle_seats=FALSE
+	THEN
+		UPDATE seat_status SET concurrent_user_state=TRUE WHERE seat_id=(SELECT id FROM seat WHERE Seats=seatno);
+		SET FLAG=1;
+	END IF;
+	ELSE
+		SET FLAG=0;
 END IF;
 RETURN flag;
 END $$
 DELIMITER ;
 
-CALL seat_status('seat1')
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*Create a function to generate unique order_id*/
 DROP FUNCTION rand_no;
