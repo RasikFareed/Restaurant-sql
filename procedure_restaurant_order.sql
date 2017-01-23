@@ -16,7 +16,7 @@ CREATE PROCEDURE place_order(seatno VARCHAR(20),IN _list1 MEDIUMTEXT,IN _list2 M
           
           DECLARE order_id INT;
           SET counter=0;
-          SELECT rand_no() INTO order_id; 
+          SET  order_id=(SELECT IFNULL(MAX(ordered_id),0)+1 FROM food_transaction); 
 					
 
 START TRANSACTION;

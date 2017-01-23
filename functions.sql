@@ -131,11 +131,7 @@ DELIMITER $$
 CREATE FUNCTION rand_no() RETURNS INT(11)
 BEGIN
 DECLARE order_id INT;
-SET order_id=(FLOOR(100+RAND()*(900)));
-IF order_id IN(SELECT ordered_id AS ordere_id FROM food_transaction)
-THEN
-CALL rand_no();
-END IF;
+SET order_id=(SELECT IFNULL(MAX(order_id),0)+1 FROM order_details);
 RETURN order_id;
 END $$
 DELIMITER ;
