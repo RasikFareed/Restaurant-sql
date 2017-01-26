@@ -105,16 +105,11 @@ CREATE FUNCTION seat_status(seatno VARCHAR(20)) RETURNS INT(11)
 BEGIN
 DECLARE states VARCHAR(20);
 DECLARE flag INT;
-DECLARE toggle_seats BOOLEAN;
-SELECT concurrent_user_state INTO toggle_seats FROM seat_status WHERE seat_id=(SELECT id FROM seat WHERE Seats=seatno);
 SET states=(SELECT state FROM seat_status WHERE seat_id=(SELECT id FROM seat WHERE Seats=seatno));
 IF(states='Available')
 THEN
-IF toggle_seats=FALSE
-	THEN
-		UPDATE seat_status SET concurrent_user_state=TRUE WHERE seat_id=(SELECT id FROM seat WHERE Seats=seatno);
 		SET FLAG=1;
-	END IF;
+	
 	ELSE
 		SET FLAG=0;
 END IF;

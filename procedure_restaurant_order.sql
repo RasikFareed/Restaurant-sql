@@ -17,23 +17,27 @@ CREATE PROCEDURE place_order(seatno VARCHAR(20),IN _list1 MEDIUMTEXT,IN _list2 M
           DECLARE order_id INT;
           SET counter=0;
           SET  order_id=(SELECT IFNULL(MAX(ordered_id),0)+1 FROM food_transaction); 
-					
+          
+      
+	  CALL seat_check(seatno,@seat_msg,@FLAG);
+	 				
 
-START TRANSACTION;
-SET autocommit=0;
+
           IF LENGTH(TRIM(_list1)) = 0 OR _list1 IS NULL OR LENGTH(TRIM(_list2)) = 0 OR _list2 IS NULL
           THEN
              SELECT 'Invalid Order' INTO message;
              SELECT message;
           ELSE
 /*Check for seat Availability*/
-          IF(seat_status(seatno)=1)
+
+          IF(@FLAG=1)
           THEN
-          
+ START TRANSACTION;
+SET autocommit=0;
          UPDATE seat_status
          SET state='UnAvailable'
          WHERE seat_id=(SELECT id FROM seat WHERE Seats=seatno);
-         
+   
          iterator :
          LOOP    
             IF LENGTH(TRIM(_list1)) = 0 OR _list1 IS NULL OR LENGTH(TRIM(_list2)) = 0 OR _list2 IS NULL THEN
@@ -67,6 +71,7 @@ SET autocommit=0;
                   
 
          END LOOP; 
+       
        ELSE
        SELECT 'Seat UnAvailable' INTO message;
        SELECT message;
@@ -76,9 +81,10 @@ SET autocommit=0;
          UPDATE seat_status
          SET state='Available',concurrent_user_state=FALSE
          WHERE seat_id=(SELECT id FROM seat WHERE Seats=seatno);
+      COMMIT;    
        END IF;  
         
-  COMMIT;   
+  
     
     
  END $$
