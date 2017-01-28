@@ -2,23 +2,19 @@ DROP PROCEDURE view_order_details;
 DELIMITER $$
 CREATE PROCEDURE view_order_details (l_order_id INT)
 BEGIN
-SELECT order_id,food_list FROM order_details
-JOIN menu
-WHERE order_id=l_order_id AND menu.`id`=order_details.`order_item`
-ORDER BY order_id;
+SELECT ordered_id,seat_no,ordered_item,quantity,ordered_time,ordered_date,state FROM food_transaction
+WHERE ordered_id=l_order_id
+ORDER BY ordered_id;
 END $$
 DELIMITER ;
 
 
-SELECT*FROM order_details
-CALL view_order_details(691)
+
 
 
 CREATE VIEW view_order_details AS
-SELECT order_id,food_list FROM order_details
-JOIN menu
-WHERE menu.`id`=order_details.`order_item`
-ORDER BY order_id;
+SELECT ordered_id,seat_no,ordered_item,quantity,ordered_time,ordered_date,state FROM food_transaction
+ORDER BY ordered_id;
 
 DROP VIEW view_order_details
 

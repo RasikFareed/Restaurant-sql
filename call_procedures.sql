@@ -24,10 +24,12 @@ To reset the stock-------->stock_reset event is used
 CALL place_order('seat8','Variety Rice,North Indian Thali','2,3',CURRENT_TIME,@message);
 
 
-CALL cancel_order(1,'seat8','North Indian Thali',@cancel_message)
+CALL cancel_order(1,'seat8','North Indian Thali',@cancel_message);
 
-CALL add_food(20,'Porattas','Dinner')
+CALL add_food('Porattas','Dinner',@add_message);
 
-SELECT * FROM view_order_details
+CALL view_order_details (2);
+
+SELECT * FROM view_order_details;
 
 SELECT * FROM view_stock

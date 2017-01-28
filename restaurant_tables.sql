@@ -1,5 +1,5 @@
 CREATE TABLE menu (
-  id SMALLINT NOT NULL,
+  id SMALLINT NOT NULL,AUTO_INCREMENT,
   food_list VARCHAR(20) UNIQUE NOT NULL ,
   PRIMARY KEY (id)
 )
@@ -91,20 +91,20 @@ INSERT INTO foodtype(id,TYPE,From_time,To_time,quantity)VALUES(1,'Dinner','19:00
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-INSERT INTO menu(id,food_list)VALUES(1,'Idly');
-INSERT INTO menu(id,food_list)VALUES(2,'Vada');
-INSERT INTO menu(id,food_list)VALUES(3,'Dosa');
-INSERT INTO menu(id,food_list)VALUES(4,'Poori');
-INSERT INTO menu(id,food_list)VALUES(5,'Pongal');
-INSERT INTO menu(id,food_list)VALUES(6,'Coffee');
-INSERT INTO menu(id,food_list)VALUES(7,'Tea');
-INSERT INTO menu(id,food_list)VALUES(8,'South Indian Meals');
-INSERT INTO menu(id,food_list)VALUES(9,'North Indian Thali');
-INSERT INTO menu(id,food_list)VALUES(10,'Variety Rice');
-INSERT INTO menu(id,food_list)VALUES(11,'Snacks');
-INSERT INTO menu(id,food_list)VALUES(12,'Fried Rice');
-INSERT INTO menu(id,food_list)VALUES(13,'Chapatti');
-INSERT INTO menu(id,food_list)VALUES(14,'Chat Items');
+INSERT INTO menu(food_list)VALUES('Idly');
+INSERT INTO menu(food_list)VALUES('Vada');
+INSERT INTO menu(food_list)VALUES('Dosa');
+INSERT INTO menu(food_list)VALUES('Poori');
+INSERT INTO menu(food_list)VALUES('Pongal');
+INSERT INTO menu(food_list)VALUES('Coffee');
+INSERT INTO menu(food_list)VALUES('Tea');
+INSERT INTO menu(food_list)VALUES('South Indian Meals');
+INSERT INTO menu(food_list)VALUES('North Indian Thali');
+INSERT INTO menu(food_list)VALUES('Variety Rice');
+INSERT INTO menu(food_list)VALUES('Snacks');
+INSERT INTO menu(food_list)VALUES('Fried Rice');
+INSERT INTO menu(food_list)VALUES('Chapatti');
+INSERT INTO menu(food_list)VALUES('Chat Items');
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
