@@ -17,7 +17,7 @@ CREATE PROCEDURE place_order(seatno VARCHAR(20),IN _list1 MEDIUMTEXT,IN _list2 M
           DECLARE order_id INT;
           SET counter=0;
           SET  order_id=(SELECT IFNULL(MAX(ordered_id),0)+1 FROM food_transaction); 
-          
+          SET message= "";
       
 	  CALL seat_check(seatno,@seat_msg,@FLAG);
 	 				
@@ -61,9 +61,9 @@ SET autocommit=0;
                 ELSE
   /*Call the procedure foodOrder to order the items for requested seats*/ 
 		CALL foodOrder(order_id,seatno,_next1,_next2,CURRENT_TIME,@out_message);
-		SELECT @out_message INTO message;
+		SET message=CONCAT(message,". ",@out_message);
 		SELECT message;
-		
+
 		
                 END IF;           
                    SET _list1 = INSERT(_list1,1,_nextlen1 + 1,'');
